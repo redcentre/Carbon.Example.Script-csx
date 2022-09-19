@@ -1,3 +1,58 @@
 # Overview
 
-TODO
+The Carbon cross-tabulation libraries are standard .NET assemblies that can be called from modern scripting hosts. This repository contains sample scripts that exercise the data manipulation and reporting capabilities of Carbon.
+
+The ability to call Carbon functionality from scripts allows data processing professionals to automate the preparation and generation of cross-tabulation reports.
+
+Microsoft provide the command line tool `dotnet-script.exe` to run C# scripts on multiple platfoms such as Windows, Linux and macOS. The command is provided as part of the .NET 6.0 SDK which can be downloaded from:
+
+<https://dotnet.microsoft.com/en-us/download/dotnet/6.0>
+
+C# script files conventionally have the extension .csx. The following commands illustrate how to run a C# script.
+
+```
+# WINDOWS
+%HOMEPATH%\.dotnet\tools\dotnet-script "Sample Script.csx"
+```
+
+```
+# UNIX
+$HOME\.dotnet\tools\dotnet-script "Sample Script.csx"
+```
+
+For convenience, the path to dotnet-script.exe may be added to the current user's PATH environment during login or at the beginning of a long script.
+
+---
+
+## NuGet Packages
+
+Most csx scripts that call Carbon will begin with the statement:
+
+```
+#r "nuget:RCS.Carbon.Tables, 8.3.9"
+```
+
+The scripting host recognises that the script has a dependency on the [RCS.Carbon.Tables][nugtab] package and follows the convention of downloading the package and all of its descendant dependency packages. The downloaded packages are cached under the `%HOMEPATH%\.nuget\packages/` directory. There will be an unpredictable delay when the package is first downloaded, but using the cached copy will be fast for future script runs. The cache can be ignored by using the `--no-cache` switch to force a fresh package download.
+
+> :construction: NOTE -- It's unclear yet if the version number is required in the package reference. Omitting the version is supposed to reference the latest package release, but this has caused errors during testing. This matter is still being researched.
+
+---
+
+## Sample Scripts
+
+### GenTab-Basic.csx
+
+This script is a good basic test that the Carbon libraries are behaving correctly. Comments in the C# code explain what is happening in the different steps, but in summary they are the following.
+
+- A CrossTabEngine class is created.
+- A `LoginId` call authenticates the caller.
+- An `OpenJob` call opens a sample public Azure job published by Red Centre Software.
+- A `ListVartreeNames` call lists the variable tree names registered in the job.
+- A `GenTab` call generates a cross-tabulation report in CSV format.
+- `CloseJob` and `LogoutId` calls cleanly finish script processing.
+
+---
+
+Last updated: 19-Sep-2022
+
+[nugtab]: https://www.nuget.org/packages/RCS.Carbon.Tables/

@@ -12,7 +12,7 @@ C# script files conventionally have the extension .csx. The following commands i
 
 ```
 # WINDOWS
-%HOMEPATH%\.dotnet\tools\dotnet-script "Sample Script.csx"
+%USERPROFILE%\.dotnet\tools\dotnet-script "Sample Script.csx"
 ```
 
 ```
@@ -51,8 +51,5 @@ This script is a good basic test that the Carbon libraries are behaving correctl
 - A `GenTab` call generates a cross-tabulation report in CSV format.
 - `CloseJob` and `LogoutId` calls cleanly finish script processing.
 
----
-
-Last updated: 19-Sep-2022
 
 [nugtab]: https://www.nuget.org/packages/RCS.Carbon.Tables/

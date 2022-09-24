@@ -50,6 +50,6 @@ This script is a good basic test that the Carbon libraries are behaving correctl
 
 
 [nugtab]: https://www.nuget.org/packages/RCS.Carbon.Tables/
-[prereq]: ../Documentation/wiki/.NET-Prerequisites-and-Installation
+[prereq]: https://github.com/redcentre/Documentation/wiki/.NET-Prerequisites-and-Installation
 [net]: https://en.wikipedia.org/wiki/.NET
 [script]: https://github.com/dotnet-script/dotnet-script

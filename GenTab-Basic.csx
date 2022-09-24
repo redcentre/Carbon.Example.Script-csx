@@ -3,7 +3,7 @@
 // Copyright © 2022 Red Centre Software
 // https://www.redcentresoftware.com/
 
-#r "nuget:RCS.Carbon.Tables, 8.3.9"
+#r "nuget:RCS.Carbon.Tables, 8.3.10"
 
 using System;
 using System.Linq;
@@ -14,12 +14,6 @@ using RCS.Carbon.Tables;
 using RCS.Carbon.Shared;
 using static System.Console;
 
-const string CredentialId = "16499372";
-const string CredentialPassword = "C6H12O6";
-const string CloudCust = "client1rcs";
-const string CloudJob = "demo";
-const string LicensingUri = "https://rcsapps.azurewebsites.net/licensing2test/";
-Console.ForegroundColor = ConsoleColor.White;
 //------------------------------------------------------
 // Create a crosstab engine instance and print the name,
 // version, build info and current framework
@@ -33,28 +27,36 @@ var tfa = asm.GetCustomAttribute<TargetFrameworkAttribute>();
 WriteLine($"Created {t.Name} {ver} Timestamp {build}");
 WriteLine($"Framework {tfa.FrameworkName}");
 
-//------------------------------------------------------
-// Login using the Carbon guest account credentials
-// and print some of the returned licensing information.
-//------------------------------------------------------
-Licence lic = await engine.LoginId(CredentialId, CredentialPassword, LicensingUri);
+//------------------------------------------------
+// Get the 'free' licence to activate the engine,
+// then print some of the licensing information.
+//------------------------------------------------
+Licence lic = await engine.GetFreeLicence();
 WriteLine($"License Id ----------- {lic.Id}");
 WriteLine($"License Name --------- {lic.Name}");
 WriteLine($"License Entity Id ---- {lic.EntityId}");
 WriteLine($"License Entity ------- {lic.EntityName}");
 WriteLine($"License Sunset ------- {lic.Sunset:dd-MMM-yyyy}");
+foreach (var cust in lic.Customers)
+{
+	WriteLine($"License | {cust.Name}");
+	foreach (var job in cust.Jobs)
+	{
+		WriteLine($"License |  | {job.Name}");
+	}
+}
 
 //------------------------------------------------
 // Open one of the public cloud jobs and list the
 // variable tree names defined in the job.
 //------------------------------------------------
-engine.OpenJob(CloudCust, CloudJob);
-string[] vtnames = engine.ListVartreeNames().ToArray();
-WriteLine($"Vartree count = {vtnames.Length}");
-foreach (string vtname in vtnames)
-{
-	WriteLine($"VARTREE | {vtname}");
-}
+engine.OpenJob("rcsruby", "demo");
+//string[] vtnames = engine.ListVartreeNames().ToArray();
+//WriteLine($"Vartree count = {vtnames.Length}");
+//foreach (string vtname in vtnames)
+//{
+//	WriteLine($"VARTREE | {vtname}");
+//}
 
 //--------------------------------------------------------------
 // Generate a crosstab report in CSV format using the "Age" and
@@ -68,5 +70,3 @@ WriteLine(body);
 
 bool closed = engine.CloseJob();
 Console.WriteLine($"Job closed -> {closed}");
-int count = await engine.LogoutId(CredentialId);
-Console.WriteLine($"Logout remaining licence count -> {count}");

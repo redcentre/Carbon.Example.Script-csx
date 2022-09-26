@@ -36,6 +36,18 @@ The scripting host recognises that the script has a dependency on the [RCS.Carbo
 
 ---
 
+## using statements
+
+Scripts that work with jobs, reports and variables will need the following statements before the code body to add namespaces for commonly used classes.
+
+```
+using RCS.Carbon.Tables
+using RCS.Carbon.Variables
+using RCS.Carbon.Shared
+```
+
+---
+
 ## Sample Scripts
 
 ### GenTab-Basic.csx

@@ -1,3 +1,7 @@
+:hand: Note that this repository contains documentation and sample scripts that are intended to be run using the standard **dotnet-script** tool, not Red Centre Software's **rcs.exe** script runner command which is customised for running scripts that call Carbon. The **rcsx.exe** command is discussed in detail in the ![PDF][pdf16] [Carbon Scripting][carbpdf] and ![PDF][pdf16] [Libraries and Applications][carbpdf] documents.
+
+---
+
 # Overview
 
 The Carbon cross-tabulation libraries are standard .NET assemblies that can be called from modern scripting hosts. This repository contains sample scripts that exercise the data manipulation and reporting capabilities of Carbon.
@@ -65,3 +69,5 @@ This script is a good basic test that the Carbon libraries are behaving correctl
 [prereq]: https://github.com/redcentre/Documentation/wiki/.NET-Prerequisites-and-Installation
 [net]: https://en.wikipedia.org/wiki/.NET
 [script]: https://github.com/dotnet-script/dotnet-script
+[carbpdf]: https://rcsapps.azurewebsites.net/doc/carbon/Carbon%20Scripting.pdf
+[pdf16]: https://systemrcs.blob.core.windows.net/wiki-images/pdf16.png

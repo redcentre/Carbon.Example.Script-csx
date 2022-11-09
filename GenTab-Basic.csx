@@ -3,7 +3,7 @@
 // Copyright © 2022 Red Centre Software
 // https://www.redcentresoftware.com/
 
-#r "nuget:RCS.Carbon.Tables, 8.3.10"
+#r "nuget:RCS.Carbon.Tables"
 
 using System;
 using System.Linq;
@@ -32,11 +32,11 @@ WriteLine($"Framework {tfa.FrameworkName}");
 // then print some of the licensing information.
 //------------------------------------------------
 Licence lic = await engine.GetFreeLicence();
-WriteLine($"License Id ----------- {lic.Id}");
-WriteLine($"License Name --------- {lic.Name}");
-WriteLine($"License Entity Id ---- {lic.EntityId}");
-WriteLine($"License Entity ------- {lic.EntityName}");
-WriteLine($"License Sunset ------- {lic.Sunset:dd-MMM-yyyy}");
+WriteLine($"License Id ........... {lic.Id}");
+WriteLine($"License Name ......... {lic.Name}");
+WriteLine($"License Entity Id .... {lic.EntityId}");
+WriteLine($"License Entity ....... {lic.EntityName}");
+WriteLine($"License Sunset ....... {lic.Sunset:dd-MMM-yyyy}");
 foreach (var cust in lic.Customers)
 {
 	WriteLine($"License | {cust.Name}");
@@ -51,12 +51,12 @@ foreach (var cust in lic.Customers)
 // variable tree names defined in the job.
 //------------------------------------------------
 engine.OpenJob("rcsruby", "demo");
-//string[] vtnames = engine.ListVartreeNames().ToArray();
-//WriteLine($"Vartree count = {vtnames.Length}");
-//foreach (string vtname in vtnames)
-//{
-//	WriteLine($"VARTREE | {vtname}");
-//}
+string[] vtnames = engine.ListVartreeNames().ToArray();
+WriteLine($"Vartree count = {vtnames.Length}");
+foreach (string vtname in vtnames)
+{
+	WriteLine($"VARTREE | {vtname}");
+}
 
 //--------------------------------------------------------------
 // Generate a crosstab report in CSV format using the "Age" and

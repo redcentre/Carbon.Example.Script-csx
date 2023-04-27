@@ -33,7 +33,7 @@ For convenience, the path to dotnet-script.exe may be added to the current user'
 Most csx scripts that call Carbon will begin with the statement:
 
 ```
-#r "nuget:RCS.Carbon.Tables, 8.3.10"
+#r "nuget:RCS.Carbon.Tables"
 ```
 
 The scripting host recognises that the script has a dependency on the [RCS.Carbon.Tables][nugtab] package and follows the convention of downloading the package and all of its descendant dependency packages. The downloaded packages are cached under the `%HOMEPATH%\.nuget\packages` directory. There will be an unpredictable delay when the package is first downloaded, but using the cached copy will be fast for future script runs.
@@ -50,6 +50,16 @@ using RCS.Carbon.Variables
 using RCS.Carbon.Shared
 ```
 
+Scripts that perform import and export operations will need the following additional statements.
+
+```
+#r "nuget:RCS.Carbon.Import"
+#r "nuget:RCS.Carbon.Export"
+
+using RCS.Carbon.Import
+using RCS.Carbon.Export
+```
+
 ---
 
 ## Sample Scripts
@@ -64,6 +74,15 @@ This script is a good basic test that the Carbon libraries are behaving correctl
 - A `GenTab` call generates a cross-tabulation report in CSV format.
 - `CloseJob` releases job resources.
 
+---
+
+## Troubleshooting
+
+:boom: The donet-script command can unpredictable produce an error like the following example:
+
+<span style="color:red">System.IO.FileLoadException: Could not load file or assembly 'System.Text.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51'. Could not find or load a specific file. (0x80131621)</span>
+
+In this case, the switch `--isolated-load-context` should be added to the command parameters. This issue is discussed in the article [Assembly Isolation Feature][asmiso].
 
 [nugtab]: https://www.nuget.org/packages/RCS.Carbon.Tables/
 [prereq]: https://github.com/redcentre/Documentation/wiki/.NET-Prerequisites-and-Installation
@@ -71,3 +90,4 @@ This script is a good basic test that the Carbon libraries are behaving correctl
 [script]: https://github.com/dotnet-script/dotnet-script
 [carbpdf]: https://rcsapps.azurewebsites.net/doc/carbon/Carbon%20Scripting.pdf
 [pdf16]: https://systemrcs.blob.core.windows.net/wiki-images/pdf16.png
+[asmiso]: https://www.strathweb.com/2021/09/dotnet-script-1-2-is-out-with-assembly-isolation-feature/

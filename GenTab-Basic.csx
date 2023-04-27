@@ -1,6 +1,6 @@
 ﻿// Carbon cross-tabulation library sample
 // https://github.com/redcentre
-// Copyright © 2022 Red Centre Software
+// Copyright © 2022-2023 Red Centre Software
 // https://www.redcentresoftware.com/
 
 #r "nuget:RCS.Carbon.Tables"
@@ -31,13 +31,13 @@ WriteLine($"Framework {tfa.FrameworkName}");
 // Get the 'free' licence to activate the engine,
 // then print some of the licensing information.
 //------------------------------------------------
-Licence lic = await engine.GetFreeLicence();
-WriteLine($"License Id ........... {lic.Id}");
-WriteLine($"License Name ......... {lic.Name}");
-WriteLine($"License Entity Id .... {lic.EntityId}");
-WriteLine($"License Entity ....... {lic.EntityName}");
-WriteLine($"License Sunset ....... {lic.Sunset:dd-MMM-yyyy}");
-foreach (var cust in lic.Customers)
+LicenceInfo licinfo = await engine.GetFreeLicence();
+Console.WriteLine(licinfo.GetType().FullName);
+WriteLine($"License Id ........... {licinfo.Id}");
+WriteLine($"License Name ......... {licinfo.Name}");
+string rolejoin = string.Join(",", licinfo.Roles);
+WriteLine($"License Roles ........ {rolejoin}");
+foreach (var cust in licinfo.Customers)
 {
 	WriteLine($"License | {cust.Name}");
 	foreach (var job in cust.Jobs)

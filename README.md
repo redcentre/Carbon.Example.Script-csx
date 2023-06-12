@@ -78,7 +78,7 @@ This script is a good basic test that the Carbon libraries are behaving correctl
 
 ## Troubleshooting
 
-:boom: The donet-script command can unpredictable produce an error like the following example:
+:boom: The donet-script command can unpredictably produce an error like the following example:
 
 <span style="color:red">System.IO.FileLoadException: Could not load file or assembly 'System.Text.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51'. Could not find or load a specific file. (0x80131621)</span>
 

@@ -3,8 +3,7 @@
 // Copyright © 2022-2023 Red Centre Software
 // https://www.redcentresoftware.com/
 
-#r "nuget:RCS.Carbon.Tables, 8.5.0"			// Why is the version number needed sometimes to force the latest packge to be used?
-#r "nuget:RCS.Carbon.Licensing.RedCentre"
+#r "nuget:RCS.Carbon.Tables, 8.5.9"			// Why is the version number needed sometimes to force the latest packge to be used?
 
 using System;
 using System.Linq;

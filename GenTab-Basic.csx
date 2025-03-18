@@ -1,9 +1,12 @@
 ﻿// Carbon cross-tabulation library sample
 // https://github.com/redcentre
-// Copyright © 2022-2023 Red Centre Software
+// Copyright © 2022-2025 Red Centre Software
 // https://www.redcentresoftware.com/
 
-#r "nuget:RCS.Carbon.Tables, 8.5.9"			// Why is the version number needed sometimes to force the latest packge to be used?
+// Run this script with the command: dotnet-script GenTab-Basic.csx --isolated-load-context
+
+#r "nuget:RCS.Carbon.Tables"
+#r "nuget:RCS.Carbon.Licensing.Shared"
 
 using System;
 using System.Linq;
@@ -32,13 +35,13 @@ WriteLine($"Framework {tfa.FrameworkName}");
 // Get the 'free' licence to activate the engine,
 // then print some of the licensing information.
 //------------------------------------------------
-LicenceInfo licinfo = await engine.GetFreeLicence();
-Console.WriteLine(licinfo.GetType().FullName);
-WriteLine($"License Id ........... {licinfo.Id}");
-WriteLine($"License Name ......... {licinfo.Name}");
-string rolejoin = string.Join(",", licinfo.Roles);
+Licence lic = await engine.GetFreeLicence();
+WriteLine(lic.GetType().FullName);
+WriteLine($"License Id ........... {lic.Id}");
+WriteLine($"License Name ......... {lic.Name}");
+string rolejoin = string.Join(",", lic.Roles);
 WriteLine($"License Roles ........ {rolejoin}");
-foreach (var cust in licinfo.Customers)
+foreach (var cust in lic.Customers)
 {
 	WriteLine($"License | {cust.Name}");
 	foreach (var job in cust.Jobs)
